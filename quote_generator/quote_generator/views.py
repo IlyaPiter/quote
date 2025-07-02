@@ -1,4 +1,3 @@
-# from django.shortcuts import  render
 from random import randint
 
 from django.http import HttpResponse
