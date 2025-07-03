@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Цитаты</title>
+  </head>
+  <body>
+    <h1>Цитата</h1>
+    {% block content %}
+    {{ quote.content }} - {{ quote.source.title }} ({{ quote.source.author }})
+    {% endblock %} 
+  </body>
+</html> 
