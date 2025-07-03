@@ -11,9 +11,17 @@ class Quote(models.Model):
     content = models.TextField()
     source = models.ForeignKey(
         Masterpiece,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
     value = models.IntegerField()
+
+    class Meta:
+        constraints = (
+            models.UniqueConstraint(
+                fields=('content', 'source'),
+                name='Unique quote constraint',
+            ),
+        )
 
     def __str__(self):
         return self.content
