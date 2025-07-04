@@ -7,6 +7,13 @@
     <h1>Цитата</h1>
     {% block content %}
     {{ quote.content }} - {{ quote.source.title }} ({{ quote.source.author }})
+    <br>
+    Количество просмотров: {{ quote.views }}
+    <form method="POST">
+    {% csrf_token %}
+    <button type="submit" name="like" value = "Pressed"> Like: {{ quote.likes }} </button>    
+    <button type="submit" name="dislike" value = "Pressed"> Dislike: {{ quote.dislikes }} </button>
+    </form>
     {% endblock %} 
   </body>
 </html> 

@@ -1,7 +1,7 @@
-from random import randint
+from random import choices
+import pdb
 
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 
 from .models import Quote
 from .forms import QuoteForm
@@ -15,7 +15,19 @@ def add (request):
 
 
 def index(request):
-    context = {
-        'quote': Quote.objects.get(pk=randint(1, Quote.objects.count()))
-        }
+    weights_list = list(Quote.objects.values_list('value', flat=True))
+    quote = Quote.objects.get(pk=choices(
+        range (1, len(weights_list)+1), weights=weights_list)[0])
+    quote.views += 1
+    quote.save()
+    context = {'quote': quote}   
+    if request.method == 'POST':
+        if request.POST.get('like'):
+            quote.likes += 1
+            quote.save()
+
+        elif request.POST.get('dislike'):
+            quote.dislikes += 1
+            quote.save()
+
     return render(request, 'quote.html', context)

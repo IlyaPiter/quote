@@ -12,5 +12,5 @@ class QuoteForm(forms.ModelForm):
     def clean(self):
         super().clean()
         if self.cleaned_data:
-            if Quote.objects.filter(source=self.cleaned_data['source']).count() >= 3:
+            if self.cleaned_data['source'].masterpieces.count() >= 3:
                 raise ValidationError('У одного источника не должно быть больше трех цитат')

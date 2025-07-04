@@ -12,12 +12,8 @@ class Quote(models.Model):
     source = models.ForeignKey(
         Masterpiece,
         on_delete=models.CASCADE,
-        related_name='masterpieces',
     )
     value = models.IntegerField()
-    views = models.IntegerField(default=0)
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
 
     class Meta:
         constraints = (
@@ -26,7 +22,6 @@ class Quote(models.Model):
                 name='Unique quote constraint',
             ),
         )
-
 
     def __str__(self):
         return self.content
