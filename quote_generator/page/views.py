@@ -25,7 +25,6 @@ def index(request):
         if request.POST.get('like'):
             quote.likes += 1
             quote.save()
-
         elif request.POST.get('dislike'):
             quote.dislikes += 1
             quote.save()
