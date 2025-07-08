@@ -1,17 +1,18 @@
 from random import choices
-import pdb
 
 from django.shortcuts import render
 
 from .models import Quote
 from .forms import QuoteForm
 
+POSTS_LIMIT = 10
+
 def add (request):
     form = QuoteForm(request.POST)
     context = {'form': form}
     if form.is_valid():
         form.save()
-    return render(request, 'form.html', context) 
+    return render(request, 'page/form.html', context) 
 
 
 def index(request):
@@ -28,5 +29,9 @@ def index(request):
         elif request.POST.get('dislike'):
             quote.dislikes += 1
             quote.save()
+    return render(request, 'page/quote.html', context)
 
-    return render(request, 'quote.html', context)
+def best(request):
+    quotes = Quote.objects.values('content', 'source__title', 'source__author', 'likes', 'dislikes')[:POSTS_LIMIT]
+    context = {'quotes': quotes}
+    return render(request, 'page/best.html', context)

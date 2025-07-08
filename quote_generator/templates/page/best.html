@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+<head>
+  {% block title %}
+    <title>Замечательные цитаты. 10 популярных цитат</title>
+  {% endblock %}
+</head>
+<body>
+  {% include "includes/header.html" %}
+    {% block content %}
+      {% for quote in quotes %}
+        <div class="card col-10">
+          <div class="card-body">
+            <blockquote class="blockquote">
+              <p> {{ quote.content }} </p>
+              <footer class="blockquote-footer">
+                {{ quote.source__title }} <cite title="Source Title">({{ quote.source__author }})</cite>
+              </footer>
+            </blockquote> 
+          </div>
+          <div class="card-footer">
+            Лайки: {{ quote.likes }}   Дизлайки: {{ quote.dislikes }}
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    {% endblock %} 
+  </body>
+</html> 

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% load static %}
+<head>
+  {% block title %}
+    <title>Замечательные цитаты. Добавление цитаты</title>
+  {% endblock %}
+</head>
+<body>
+  {% include "includes/header.html" %}
+  {% block content %}
+    <div class="card col-6">
+      <div class="card-header">
+        Добавление новой цитаты
+      </div>
+      <div class="card-body">
+        <form method="post">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% bootstrap_button button_type="submit" content="Oтправить" %}
+        </form>
+    </div>
+  {% endblock %} 
+</body>
