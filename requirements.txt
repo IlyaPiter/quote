@@ -1,4 +1,7 @@
 asgiref==3.8.1
+astroid==3.3.10
+colorama==0.4.6
+dill==0.4.0
 Django==5.2.3
 django-bootstrap5==25.1
 flake8==7.3.0
@@ -6,7 +9,12 @@ flake8-isort==6.1.2
 isort==6.0.1
 mccabe==0.7.0
 pep8-naming==0.15.1
+platformdirs==4.3.8
 pycodestyle==2.14.0
 pyflakes==3.4.0
+pylint==3.3.7
+pylint-django==2.6.1
+pylint-plugin-utils==0.9.0
 sqlparse==0.5.3
+tomlkit==0.13.3
 tzdata==2025.2
