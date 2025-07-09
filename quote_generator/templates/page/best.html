@@ -22,6 +22,10 @@
             Лайки: {{ quote.likes }}   Дизлайки: {{ quote.dislikes }}
           </div>
         </div>
+      {% empty %}
+        <div class="alert alert-info col-5" role="alert">
+          Нет доступных цитат. Ни популярных, ни не популярных.
+        </div>
       {% endfor %}
       </div>
     {% endblock %} 

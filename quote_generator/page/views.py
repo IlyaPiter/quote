@@ -1,6 +1,7 @@
 from random import choices
 
-from django.shortcuts import render
+from django.http import Http404
+from django.shortcuts import redirect, render
 
 from .forms import QuoteForm
 from .models import Quote
@@ -17,19 +18,22 @@ def add(request):
 
 
 def index(request):
-    weights_list = list(Quote.objects.values_list('value', flat=True))
-    quote = Quote.objects.get(pk=choices(
-        range(1, len(weights_list)+1), weights=weights_list)[0])
-    quote.views += 1
-    quote.save()
-    context = {'quote': quote}
-    if request.method == 'POST':
-        if request.POST.get('like'):
-            quote.likes += 1
+    if Quote.objects.exists():
+        weights_list = list(Quote.objects.values_list('value', flat=True))
+        quote = Quote.objects.get(pk=choices(
+            range(1, len(weights_list)+1), weights=weights_list)[0])
+        quote.views += 1
+        quote.save()
+        context = {'quote': quote}
+        if request.method == 'POST':
+            if request.POST.get('like'):
+                quote.likes += 1
+                quote.save()
+            elif request.POST.get('dislike'):
+                quote.dislikes += 1
             quote.save()
-        elif request.POST.get('dislike'):
-            quote.dislikes += 1
-            quote.save()
+    else:
+        context = {'quote': ''}
     return render(request, 'page/quote.html', context)
 
 

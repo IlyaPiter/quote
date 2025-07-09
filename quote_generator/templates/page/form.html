@@ -16,7 +16,7 @@
       <div class="card-body">
         <form method="post">
           {% csrf_token %}
-          {% bootstrap_form form %}
+          {% bootstrap_form form layout='inline' %}
           {% bootstrap_button button_type="submit" content="Oтправить" %}
         </form>
     </div>

@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 <head>
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
 {% block title %}
 <title>Замечательные цитаты. Главная</title>
 {% endblock %}
 </head>
 <body>
   {% block content %}
+  {% if quote %}
     <div class="card col-4">
       <div class="card-header">Цитата</div>
       <div class="card-body">
@@ -26,5 +29,10 @@
         Количество просмотров: {{ quote.views }}
       </div>
     </div>
-  {% endblock %} 
+  {% else %}
+    <div class="alert alert-info col-5" role="alert">
+      Нет доступных цитат. Пожалуйста, добавьте новую цитату.
+    </div>
+  {% endif %}
+  {% endblock %}
 </body>
