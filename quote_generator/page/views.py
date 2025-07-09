@@ -1,7 +1,6 @@
 from random import choices
 
-from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 
 from .forms import QuoteForm
 from .models import Quote
